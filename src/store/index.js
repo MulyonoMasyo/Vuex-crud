@@ -10,6 +10,7 @@ export default new Vuex.Store({
     penampung: "",
     findNama: "",
     findEmail: "",
+    getLocal: [],
   },
   getters: {},
   mutations: {
@@ -23,18 +24,36 @@ export default new Vuex.Store({
   },
   actions: {
     saveData({ state }, payload) {
+      // console.log(payload);
       const p = JSON.stringify(payload);
-      console.log(p);
+      // console.log(p);
       state.kumpulanData.push(payload);
 
-      console.log(JSON.stringify(state.kumpulanData));
+      // console.log(JSON.stringify(state.kumpulanData));
       // console.log(state.kumpulanData);
 
       localStorage.setItem("kelas", JSON.stringify(state.kumpulanData));
+      const pp = localStorage.getItem("kelas");
+      state.getLocal.push(payload);
+      console.log(state.getLocal);
+      // console.log(state.kumpulanData);
+      // console.log(pp);
     },
 
     deleteData({ state }, payload) {
+      console.log(payload);
+
+      // console.log(state.getLocal);
+      // console.log(state.kumpulanData);
+      // console.log(state.getLocal.splice(payload, 1));
+      // const hapus = state.kumpulanData.splice(payload, 1);
       state.kumpulanData.splice(payload, 1);
+      localStorage.setItem("kelas", JSON.stringify(state.kumpulanData));
+
+      // state.kumpulanData = localStorage.setItem(
+      //   "kelas",
+      //   JSON.stringify(state.kumpulanData)
+      // );
     },
 
     cariData({ state }, payload) {
@@ -58,9 +77,10 @@ export default new Vuex.Store({
       console.log(state.findNama, state.findEmail);
     },
     UpdateData({ state }) {
-      state.kumpulanData[state.objIndex].nama = state.findNama;
+      state.findNama = state.kumpulanData[state.objIndex].nama = state.findNama;
       state.findEmail = state.kumpulanData[state.objIndex].email =
         state.findEmail;
+      localStorage.setItem("kelas", JSON.stringify(state.kumpulanData));
     },
   },
   modules: {},

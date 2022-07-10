@@ -19,12 +19,12 @@
                    <div class="mb-3">
                     <label for="nama1" class="form-label">Nama</label>
                     <input type="text" v-model="nama" class="form-control" id="nama1">
-                    <p>{{this.$store.state.nama}}</p>
+                   
                    </div>
                    <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
                     <input type="email" v-model="email" class="form-control" id="exampleFormControlInput1">
-                    <p>{{this.$store.state.email}}</p>
+               
                    </div>
                 </div>
                     <div class="modal-footer">
@@ -133,6 +133,8 @@ export default {
         email: this.email,
       };
       this.$store.dispatch("saveData", payload);
+      this.nama = "";
+      this.email = "";
 
       // this.$store.state.kumpulanData.push({
       //   nama: payload.nama,
@@ -183,9 +185,7 @@ export default {
       // console.log(this.kumpulanData[this.objIndex].nama);
     },
     hapus(id) {
-      const payload = {
-        id: id,
-      };
+      const payload = id;
       // this.$store.state.kumpulanData.splice(id, 1);
       this.$store.dispatch("deleteData", payload);
     },
